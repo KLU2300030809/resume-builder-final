@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+*{
+  font-family: "Outfit", sans-serif;
+}
+@layer base{
+  button{
+    @apply cursor-pointer;
+
+  }
+  input:not([type="checkbox"]){
+    @apply outline-none focus:ring border border-gray-300
+    focus:ring-blue-500 focus:border-blue-500 rounded-lg;
+  }
+  textarea{
+    @apply outline-none focus:ring border border-gray-300
+    focus:ring-blue-500 focus:border-blue-500 rounded-lg;
+  }
+}
+textarea:focus {
+  animation: subtleGlow 0.3s ease-in-out;
+}
+
+@keyframes subtleGlow {
+  from {
+    box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.2);
+  }
+  to {
+    box-shadow: 0 0 0 6px rgba(168, 85, 247, 0);
+  }
+}
+
+.input-style {
+  @apply px-3 py-2 text-sm rounded-lg border border-gray-300
+  focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500
+  outline-none transition;
+}
+@media print {
+  #resume-area {
+    width: 210mm;
+    min-height: auto !important;
+    overflow: hidden !important;
+  }
+
+  .resume {
+    page-break-inside: avoid;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+}
+/* PDF SAFE MODE */
+.pdf-mode * {
+  color: #111827 !important;
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
