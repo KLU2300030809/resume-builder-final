@@ -84,7 +84,7 @@ export const generatePortfolio = async (req, res) => {
       success: true,
       message: "Portfolio generated successfully",
       portfolio,
-url: `http://localhost:5173/portfolio/${slug}`
+url: `${process.env.CLIENT_URL}/portfolio/${slug}`
     });
 
   } catch (err) {

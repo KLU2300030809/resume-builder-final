@@ -4,32 +4,31 @@ import Resume from "../models/Resume.js";
 
 const router = express.Router();
 
+console.log("portfolioRoutes loaded");
+
+// ===============================
+// GET PORTFOLIO BY SLUG
+// ===============================
 router.get("/:slug", async (req, res) => {
   try {
-    console.log("🔥 SLUG HIT:", req.params.slug);
-
-    const portfolio = await Portfolio.findOne({
-      slug: req.params.slug,
-    });
+    const portfolio = await Portfolio.findOne({ slug: req.params.slug });
 
     if (!portfolio) {
       return res.status(404).json({ message: "Portfolio not found" });
     }
 
-    // get resume
     const resume = await Resume.findById(portfolio.resumeId);
 
     if (!resume) {
       return res.status(404).json({ message: "Resume not found" });
     }
 
-    // 🔥 BUILD PORTFOLIO DATA HERE
     const portfolioData = {
       hero: {
-        name: resume.personal_info?.full_name,
-        profession: resume.personal_info?.profession,
+        name: resume.personal_info?.full_name || "",
+        profession: resume.personal_info?.profession || "",
       },
-      about: resume.professional_summary,
+      about: resume.professional_summary || "",
       skills: resume.skills || [],
       projects: resume.project || [],
       experience: resume.experience || [],
@@ -41,9 +40,55 @@ router.get("/:slug", async (req, res) => {
     res.json({ portfolioData });
 
   } catch (err) {
-    console.log(err);
+    console.log("GET ERROR:", err);
     res.status(500).json({ message: err.message });
   }
 });
 
+// ===============================
+// CREATE PORTFOLIO
+// ===============================
+router.post("/generate", async (req, res) => {
+  try {
+    const { resumeId, template, accentColor } = req.body;
+
+    const resume = await Resume.findById(resumeId);
+
+    if (!resume) {
+      return res.status(404).json({ message: "Resume not found" });
+    }
+
+    const portfolioData = {
+      hero: {
+        name: resume?.personal_info?.full_name || "Unknown",
+        profession: resume?.personal_info?.profession || "",
+      },
+      about: resume?.professional_summary || "",
+      skills: resume?.skills || [],
+      projects: resume?.project || [],
+      experience: resume?.experience || [],
+      education: resume?.education || [],
+      certifications: resume?.certifications || [],
+      contact: resume?.personal_info || {},
+    };
+
+    const portfolio = await Portfolio.create({
+      userId: resume?.userId,   // MUST exist in Resume schema
+      resumeId: resume._id,
+      template,
+      accentColor,
+      portfolioData,
+      slug: `${resume?.personal_info?.full_name || "user"}-${Date.now()}`
+    });
+
+   return res.json({
+  url: `https://resume-builder-final.onrender.com/api/portfolio/${portfolio.slug}`,
+  slug: portfolio.slug
+});
+
+  } catch (err) {
+    console.log("🔥 ERROR:", err);
+    return res.status(500).json({ message: err.message });
+  }
+});
 export default router;

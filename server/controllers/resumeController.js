@@ -56,7 +56,7 @@ if (req.body.resumeData) {
 export const updateResume = async (req, res) => {
   try {
     console.log("🔥 updateResume called");
-    console.log("req.body:", req.body);
+
     console.log("req.file:", req.file);
 
     const resumeId = req.body.resumeId;

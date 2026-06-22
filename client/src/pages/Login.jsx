@@ -8,6 +8,7 @@ import api from "../configs/api";
 import toast from "react-hot-toast";
 
 const Login = () => {
+  console.log("API URL:", import.meta.env.VITE_API_URL);
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();

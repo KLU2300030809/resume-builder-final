@@ -50,9 +50,7 @@ export default function Certification({
 
         <button
           onClick={addCertification}
-          className="flex items-center gap-2 px-3 py-2 text-sm
-          bg-purple-100 text-purple-700 rounded-lg
-          hover:bg-purple-200"
+          className="flex items-center gap-2 px-3 py-2 text-sm bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200"
         >
           <Plus size={16} />
           Add Certification
@@ -66,7 +64,7 @@ export default function Certification({
       ) : (
         certifications.map((cert, index) => (
           <div
-            key={cert.id}
+            key={cert.id || index}
             className="border rounded-xl p-4 space-y-3 bg-white"
           >
             <div className="flex justify-between items-center">
@@ -75,9 +73,7 @@ export default function Certification({
               </h4>
 
               <button
-                onClick={() =>
-                  removeCertification(index)
-                }
+                onClick={() => removeCertification(index)}
                 className="text-red-500"
               >
                 <Trash2 size={16} />
@@ -89,11 +85,7 @@ export default function Certification({
               value={cert.name}
               placeholder="Certification Name"
               onChange={(e) =>
-                updateCertification(
-                  index,
-                  "name",
-                  e.target.value
-                )
+                updateCertification(index, "name", e.target.value)
               }
               className="w-full border rounded p-2"
             />
@@ -103,11 +95,7 @@ export default function Certification({
               value={cert.issuer}
               placeholder="Issuer"
               onChange={(e) =>
-                updateCertification(
-                  index,
-                  "issuer",
-                  e.target.value
-                )
+                updateCertification(index, "issuer", e.target.value)
               }
               className="w-full border rounded p-2"
             />
@@ -117,11 +105,7 @@ export default function Certification({
               value={cert.year}
               placeholder="Year"
               onChange={(e) =>
-                updateCertification(
-                  index,
-                  "year",
-                  e.target.value
-                )
+                updateCertification(index, "year", e.target.value)
               }
               className="w-full border rounded p-2"
             />

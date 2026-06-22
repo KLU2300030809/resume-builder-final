@@ -10,7 +10,7 @@ import { Sparkles, Link, Globe } from "lucide-react";
 
 const PortfolioGenerator = () => {
   const [resumes, setResumes] = useState([]);
-  const [selectedResumeId, setSelectedResumeId] = useState("");
+  const [selecteudResumeId, setSelectedResumeId] = useState("");
   const [resume, setResume] = useState(null);
 
   const [showResumeList, setShowResumeList] = useState(false);
@@ -39,7 +39,9 @@ const PortfolioGenerator = () => {
   useEffect(() => {
     fetchResumes();
   }, [fetchResumes]);
-
+useEffect(() => {
+  console.log("API URL:", import.meta.env.VITE_API_URL);
+}, []);
   // GENERATE PORTFOLIO
   const handleGenerate = async () => {
     if (!selectedResumeId) {
@@ -59,18 +61,18 @@ const PortfolioGenerator = () => {
       setPortfolioUrl(data.url);
       setPublished(true);
 
-      setPortfolioData({
+setPortfolioData({
   hero: {
-    name: selected?.personal_info?.full_name || "",
-    profession: selected?.personal_info?.profession || ""
+    name: resume?.personal_info?.full_name || "",
+    profession: resume?.personal_info?.profession || ""
   },
-  about: selected?.professional_summary || "",
-  skills: selected?.skills || [],
-  projects: selected?.project || [],   // ✅ FIXED
-  experience: selected?.experience || [],
-  education: selected?.education || [],
-  certifications: selected?.certifications || [],
-  contact: selected?.personal_info || {}
+  about: resume?.professional_summary || "",
+  skills: resume?.skills || [],
+  projects: resume?.project || [],
+  experience: resume?.experience || [],
+  education: resume?.education || [],
+  certifications: resume?.certifications || [],
+  contact: resume?.personal_info || {}
 });
       toast.success("Portfolio generated successfully!");
     } catch (error) {

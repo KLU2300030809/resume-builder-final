@@ -8,9 +8,9 @@ function ShareResume() {
 
   useEffect(() => {
     const fetchResume = async () => {
-      const res = await axios.get(
-        `http://localhost:3000/api/share/${shareId}`
-      );
+     const res = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/share/${shareId}`
+);
       setResume(res.data);
     };
 
