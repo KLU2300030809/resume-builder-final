@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import PortfolioPreview from "./pages/PortfolioPreview";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import Dashboard from "./pages/Dashboard";
@@ -10,6 +10,7 @@ import Preview from "./pages/Preview";
 import ATSGuide from "./pages/ATSGuide";
 import PDFViewer from "./pages/PDFViewer";
 import Features from "./components/home/Features";
+import PortfolioGenerator from "./pages/PortfolioGenerator";
 import Footer from "./components/home/Footer";
 import Login from "./pages/Login";
 import SharedResume from "./pages/SharedResume";
@@ -17,7 +18,7 @@ import api from "./configs/api";
 import { login, setLoading } from "./app/features/authSlice";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
-
+import PortfolioPublic from "./pages/PortfolioPublic";
 const App = () => {
   const [resumes, setResumes] = useState([]);
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const App = () => {
     }
 
     try {
-      const { data } = await api.get("/api/users/data", {
+      const { data } = await api.get("/users/data", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -86,6 +87,9 @@ const App = () => {
   element={<SharedResume />}
 />
         <Route path="/view/:resumeId" element={<Preview />} />
+        <Route path="/portfolio/:slug" element={<PortfolioPublic />} />
+<Route path="/portfolio/preview/:resumeId" element={<PortfolioPreview />} />
+<Route path="/app/portfolio-generator" element={<PortfolioGenerator />} />
       </Routes>
     </>
   );

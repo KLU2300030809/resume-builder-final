@@ -80,7 +80,7 @@ const [isPdfMode, setIsPdfMode] = useState(false);
   /* ---------------- LOAD RESUME ---------------- */
   const loadExistingResume = async () => {
     try {
-      const { data } = await api.get(`/api/resumes/get/${resumeId}`);
+      const { data } = await api.get(`/resumes/get/${resumeId}`);
       if (data.resume) {
         setResumeData(data.resume);
         document.title = data.resume.title;
@@ -96,7 +96,8 @@ const [isPdfMode, setIsPdfMode] = useState(false);
 
   /* ---------------- SAVE RESUME ---------------- */
   const saveResume = async () => {
-    try {
+   console.log(resumeData);
+     try {
       const payload = {
         resumeId: resumeData._id,
         resumeData: {
@@ -139,23 +140,25 @@ const { data } = await api.post("/api/resumes/update", payload, {
   };
 
   /* ---------------- PUBLIC / PRIVATE ---------------- */
-  const changeResumeVisibility = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("resumeId", resumeId);
-      formData.append(
-        "resumeData",
-        JSON.stringify({ public: !resumeData.public })
-      );
+const changeResumeVisibility = async () => {
+  try {
+    const { data } = await api.post("/api/resumes/update", {
+      resumeId: resumeData._id,
+      resumeData: {
+        public: !resumeData.public,
+      },
+    });
 
-      const { data } = await api.put("/api/resumes/update", formData);
-      setResumeData((prev) => ({ ...prev, public: !prev.public }));
-      toast.success(data.message);
-    } catch {
-      toast.error("Failed to update visibility");
-    }
-  };
+    setResumeData((prev) => ({
+      ...prev,
+      public: !prev.public,
+    }));
 
+    toast.success(data.message || "Updated");
+  } catch (err) {
+    toast.error("Failed to update visibility");
+  }
+};
   /* ---------------- SHARE ---------------- */
   const handleShare = () => {
     const resumeUrl = `${window.location.origin}/view/${resumeId}`;

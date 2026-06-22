@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { PencilIcon, PlusIcon, TrashIcon, UploadCloudIcon } from "lucide-react";
+import { PencilIcon, PlusIcon, TrashIcon} from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import api from "../configs/api";
 import { setUser, logout } from "../app/features/authSlice";
-
+import { Sparkles } from "lucide-react";
 const Dashboard = () => {
   const { token, user } = useSelector((state) => state.auth); // ✅ FIX: single selector
   const dispatch = useDispatch();
@@ -17,9 +17,6 @@ const Dashboard = () => {
   const [showCreateResume, setShowCreateResume] = useState(false);
   const [title, setTitle] = useState("");
 
-  const [showUploadResume, setShowUploadResume] = useState(false);
-  const [uploadTitle, setUploadTitle] = useState("");
-  const [uploadFile, setUploadFile] = useState(null);
 
   const [showEditResume, setShowEditResume] = useState(false);
   const [editTitle, setEditTitle] = useState("");
@@ -49,7 +46,7 @@ const Dashboard = () => {
     const fetchUser = async () => {
       if (!token) return;
       try {
-        const { data } = await api.get("/api/users/data");
+        const { data } = await api.get("/users/data");
         dispatch(setUser(data.user)); // ✅ FIX: removed setLocalUser
       } catch (error) {
         if (error.response?.status === 401) {
@@ -66,7 +63,7 @@ const Dashboard = () => {
   const fetchResumes = async () => {
     try {
       setIsLoading(true);
-      const { data } = await api.get("/api/resumes/user");
+      const { data } = await api.get("/resumes/user");
 setResumes(
   (data.resumes || []).map((r) => ({
     ...r,
@@ -96,7 +93,7 @@ imagePreview:
     if (!title.trim()) return toast.error("Please enter a title");
 
     try {
-     const { data } = await api.post("/api/resumes/create", {
+     const { data } = await api.post("/resumes/create", {
   resumeData: {
     title: title.trim()
   }
@@ -112,36 +109,7 @@ imagePreview:
   };
 
   /* ------------------ UPLOAD RESUME ------------------ */
-const uploadResume = async (e) => {
-  e.preventDefault();
 
-  if (!uploadTitle.trim()) return toast.error("Please enter a title");
-  if (!uploadFile) return toast.error("Please select a file");
-
-  try {
-    await api.post("/api/resumes/create", {
-  resumeData: {
-    title: uploadTitle.trim()
-  }
-});
-console.log("uploaded resume:", data.resume);
-    // success message
-    toast.success("Uploaded successfully");
-
-    // reset modal
-    setUploadTitle("");
-    setUploadFile(null);
-    setShowUploadResume(false);
-
-    // refresh dashboard resumes list
-    await fetchResumes();
-
-    // OPTIONAL: remove auto navigation
-    // navigate(`/app/builder/${data.resume._id}`);
-  } catch (error) {
-    toast.error(error?.response?.data?.message || error.message);
-  }
-};
   /* ------------------ EDIT RESUME ------------------ */
   const openEditModal = (resume) => {
     setEditId(resume._id);
@@ -154,7 +122,7 @@ const saveEdit = async (e) => {
   e.preventDefault();
 
   try {
-   await api.put("/api/resumes/update", {
+ const { data } = await api.post("/resumes/update", {
   resumeId: editId,
   resumeData: {
     title: editTitle
@@ -179,7 +147,7 @@ const saveEdit = async (e) => {
 
   const deleteResume = async () => {
     try {
-      const { data } = await api.delete(`/api/resumes/delete/${deleteId}`);
+      const { data } = await api.delete(`/resumes/delete/${deleteId}`);
       setResumes((prev) => prev.filter((r) => r._id !== deleteId));
       toast.success(data.message);
       setShowDeleteConfirm(false);
@@ -204,11 +172,23 @@ const saveEdit = async (e) => {
         {user && <p className="text-slate-600 mb-2">Welcome, {user.name}</p>}
         <p className="text-slate-500 mt-1">Create, upload, and manage your resumes</p>
 
-        {/* ACTION CARDS */}
-        <div className="flex gap-6 flex-wrap mt-6">
-          <ActionCard icon={<PlusIcon />} label="Create Resume" onClick={() => setShowCreateResume(true)} />
-          <ActionCard icon={<UploadCloudIcon />} label="Upload Resume" onClick={() => setShowUploadResume(true)} />
-        </div>
+      <div className="flex gap-6 flex-wrap mt-6">
+  <ActionCard
+    icon={<PlusIcon />}
+    label="Create Resume"
+    onClick={() => setShowCreateResume(true)}
+  />
+   {/* ✅ ADD THIS BACK */}
+  <ActionCard
+    icon={<Sparkles className="text-white" />}
+    label="Generate Portfolio"
+    onClick={() => {
+      toast.success("Generate Portfolio clicked");
+      navigate("/app/portfolio-generator"); // optional route
+    }}
+  />
+
+</div>
 
         {/* LOADING STATE */}
         {isLoading && <p className="mt-6 text-slate-500">Loading resumes...</p>}
@@ -289,32 +269,7 @@ onClick={() => {
         </Modal>
       )}
 
-      {showUploadResume && (
-        <Modal title="Upload Resume" onClose={() => setShowUploadResume(false)}>
-          <form onSubmit={uploadResume}>
-            <input
-              value={uploadTitle}
-              onChange={(e) => setUploadTitle(e.target.value)}
-              placeholder="Resume name"
-              required
-              className="w-full h-11 border rounded-lg px-4 mb-4 focus:ring-2 focus:ring-purple-400"
-            />
-            <label className="flex flex-col items-center justify-center border-2 border-dashed border-slate-300 rounded-xl p-6 cursor-pointer hover:border-purple-500 transition">
-              <UploadCloudIcon className="size-10 text-purple-500 mb-2" />
-              <p className="text-sm text-slate-600">{uploadFile ? uploadFile.name : "Click to upload PDF"}</p>
-              <input
-                type="file"
-                accept=".pdf"
-                onChange={(e) => setUploadFile(e.target.files[0])}
-                className="hidden"
-                required
-              />
-            </label>
-            <ModalActions onCancel={() => setShowUploadResume(false)} />
-          </form>
-        </Modal>
-      )}
-
+  
       {showEditResume && (
   <Modal title="Edit Resume" onClose={() => setShowEditResume(false)}>
     <form onSubmit={saveEdit}>

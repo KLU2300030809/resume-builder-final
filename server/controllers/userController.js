@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import Resume from "../models/Resume.js";
 
 const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 };

@@ -1,4 +1,5 @@
-import express from "express";
+console.log("🔥 userRoutes loaded");import express from "express";
+
 import {
   registerUser,
   loginUser,

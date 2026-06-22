@@ -65,12 +65,12 @@ const Login = () => {
     try {
       let data;
       if (state === "login") {
-        ({ data } = await api.post("/api/users/login", {
+        ({ data } = await api.post("/users/login", {
           email: formData.email.trim(),
           password: formData.password,
         }));
       } else if (state === "register") {
-        ({ data } = await api.post("/api/users/register", {
+        ({ data } = await api.post("/users/register", {
           name: formData.name.trim(),
           email: formData.email.trim(),
           password: formData.password,

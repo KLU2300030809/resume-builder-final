@@ -12,7 +12,7 @@ function ShareResumeButton({ resumeId }) {
       console.log("Resume ID:", resumeId);
 
       const { data } = await api.post(
-        `/api/share/generate/${resumeId}`
+        `/share/generate/${resumeId}`
       );
 
       console.log("Response:", data);

@@ -174,16 +174,29 @@ if (Array.isArray(resumeData.achievements)) {
 };
 
 // ---------------- GET ALL USER RESUMES ----------------
+// GET ALL USER RESUMES
 export const getAllUserResumes = async (req, res) => {
   try {
-    const resumes = await Resume.find({ userId: req.userId }).sort({ updatedAt: -1 });
-    return res.json({ success: true, resumes });
+    if (!req.userId) {
+      return res.status(401).json({
+        success: false,
+        message: "User not authenticated",
+      });
+    }
+
+    const resumes = await Resume.find({ userId: req.userId });
+
+  return res.status(200).json({
+  success: true,
+  resumes,
+});
   } catch (error) {
-    console.error("getAllUserResumes ERROR:", error);
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 };
-
 // ---------------- GET RESUME BY ID ----------------
 export const getResumeById = async (req, res) => {
   try {
@@ -250,6 +263,25 @@ export const updateAchievements = async (req, res) => {
       { achievements },
       { new: true }
     );
+
+    res.json(resume);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+export const getLatestResume = async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    const resume = await Resume.findOne({ userId }).sort({
+      createdAt: -1,
+    });
+
+    if (!resume) {
+      return res.status(404).json({
+        message: "No resume found. Please create a resume first.",
+      });
+    }
 
     res.json(resume);
   } catch (err) {
