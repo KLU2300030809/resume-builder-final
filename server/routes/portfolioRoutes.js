@@ -82,7 +82,7 @@ router.post("/generate", async (req, res) => {
     });
 
    return res.json({
-  url: `https://resume-builder-final.onrender.com/api/portfolio/${portfolio.slug}`,
+  url: `${process.env.CLIENT_URL}/portfolio/${portfolio.slug}`,
   slug: portfolio.slug
 });
 
