@@ -78,7 +78,9 @@ console.log("CLIENT_URL =", process.env.CLIENT_URL);
       template,
       accentColor,
       portfolioData,
-      slug: `${resume?.personal_info?.full_name || "user"}-${Date.now()}`
+    slug: `${(resume?.personal_info?.full_name || "user")
+  .toLowerCase()
+  .replace(/\s+/g, "-")}-${Date.now()}`
     });
 
    return res.json({
