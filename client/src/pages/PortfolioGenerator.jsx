@@ -10,7 +10,7 @@ import { Sparkles, Link, Globe } from "lucide-react";
 
 const PortfolioGenerator = () => {
   const [resumes, setResumes] = useState([]);
-  const [selecteudResumeId, setSelectedResumeId] = useState("");
+  const [selectedResumeId, setSelectedResumeId] = useState("");
   const [resume, setResume] = useState(null);
 
   const [showResumeList, setShowResumeList] = useState(false);
