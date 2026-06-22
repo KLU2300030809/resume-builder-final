@@ -71,7 +71,7 @@ router.post("/generate", async (req, res) => {
       certifications: resume?.certifications || [],
       contact: resume?.personal_info || {},
     };
-
+console.log("CLIENT_URL =", process.env.CLIENT_URL);
     const portfolio = await Portfolio.create({
       userId: resume?.userId,   // MUST exist in Resume schema
       resumeId: resume._id,
