@@ -14,13 +14,24 @@ const PORT = process.env.PORT || 3000;
 await connectDB();
 
 // CORS
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://resume-builder-final-eight.vercel.app"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(null, true); // allow for now (safe mode)
+  },
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // BODY PARSER
 app.use(express.json());
