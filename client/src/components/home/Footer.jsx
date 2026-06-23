@@ -1,81 +1,97 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Github } from "lucide-react";
+import { Facebook, Instagram, Twitter, Github, Globe } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-purple-700 text-white w-full px-6 md:px-16 lg:px-36 py-16 font-poppins">
-      {/* Top Section: Logo & Links */}
-      <div className="flex flex-col md:flex-row justify-between gap-10 border-b border-purple-500 pb-10">
-        
-        {/* Logo and description */}
-        <div className="flex flex-col md:max-w-md gap-4">
-          <Link to="/" className="flex items-center gap-2">
-            
-            <span className="text-lg font-semibold text-white">ResumeBuilder</span>
-          </Link>
+    <footer className="relative w-full bg-[#0b0b12] text-white pt-20 pb-10 overflow-hidden">
 
-          <p className="text-sm text-white/80 mt-2">
-            Build professional resumes quickly and effortlessly with our Resume Builder. Fill in your details and download a polished resume ready to impress.
-          </p>
-
-          {/* App buttons */}
-          <div className="flex items-center gap-2 mt-4">
-            <img
-              src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/refs/heads/main/assets/appDownload/googlePlayBtnBlack.svg"
-              alt="google play"
-              className="h-10 w-auto border border-white rounded"
-            />
-            <img
-              src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/refs/heads/main/assets/appDownload/appleStoreBtnBlack.svg"
-              alt="app store"
-              className="h-10 w-auto border border-white rounded"
-            />
-          </div>
-        </div>
-
-        {/* Navigation Links */}
-        <div className="flex-1 flex flex-col md:flex-row justify-between gap-10 md:gap-40">
-          <div>
-            <h2 className="font-semibold mb-5 text-white">Company</h2>
-            <ul className="text-sm space-y-2 text-white/80">
-              <li><Link to="/" className="hover:text-white transition">Home</Link></li>
-              <li><Link to="/about" className="hover:text-white transition">About us</Link></li>
-              <li><Link to="/privacy" className="hover:text-white transition">Privacy policy</Link></li>
-              <li><Link to="/ats-guide" className="hover:text-white transition">ATS Guide</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="font-semibold mb-5 text-white">Get in touch</h2>
-            <div className="text-sm space-y-2 text-white/80">
-              <p>+9494300465</p>
-              <p>2300030809cseh1@gmail.com</p>
-            </div>
-
-            {/* Social Media Icons */}
-            <div className="flex items-center gap-4 mt-4 text-indigo-300">
-              <a href="#" className="hover:-translate-y-0.5 transition-all duration-300">
-                <Facebook size={24} />
-              </a>
-              <a href="#" className="hover:-translate-y-0.5 transition-all duration-300">
-                <Instagram size={24} />
-              </a>
-              <a href="#" className="hover:-translate-y-0.5 transition-all duration-300">
-                <Twitter size={24} />
-              </a>
-              <a href="#" className="hover:-translate-y-0.5 transition-all duration-300">
-                <Github size={24} />
-              </a>
-            </div>
-          </div>
-        </div>
+      {/* Background Glow */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-10 left-1/3 w-[500px] h-[500px] bg-violet-600/10 blur-[140px] rounded-full" />
+        <div className="absolute bottom-10 right-1/3 w-[500px] h-[500px] bg-indigo-600/10 blur-[140px] rounded-full" />
       </div>
 
-      {/* Copyright */}
-      <p className="pt-6 text-center text-sm text-white/80">
-        Copyright © {new Date().getFullYear()} <Link to="/" className="hover:text-white transition">ResumeBuilder</Link>. All rights reserved.
-      </p>
+      <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16">
+
+        {/* Top Section */}
+        <div className="flex flex-col md:flex-row justify-between gap-12 pb-12 border-b border-white/10">
+
+          {/* Brand / Title */}
+          <div className="max-w-md">
+            <div className="flex items-center gap-2">
+              <Globe className="text-violet-400" size={22} />
+              <span className="text-lg font-semibold">
+                Career Profile Platform
+              </span>
+            </div>
+
+            <p className="mt-4 text-sm text-white/60 leading-relaxed">
+              Create resumes, store them securely, and generate shareable portfolio websites
+              with automated deployment.
+            </p>
+          </div>
+
+          {/* Links */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-10 text-sm">
+
+            {/* Platform */}
+            <div>
+              <h2 className="text-white font-medium mb-4">Platform</h2>
+              <ul className="space-y-2 text-white/60">
+                <li><Link className="hover:text-white transition">Home</Link></li>
+                <li><Link className="hover:text-white transition">Dashboard</Link></li>
+                <li><Link className="hover:text-white transition">Privacy Policy</Link></li>
+                <li><Link className="hover:text-white transition">Support</Link></li>
+              </ul>
+            </div>
+
+            {/* Features */}
+            <div>
+              <h2 className="text-white font-medium mb-4">Features</h2>
+              <ul className="space-y-2 text-white/60">
+                <li>Resume Builder</li>
+                <li>Portfolio Generator</li>
+                <li>Cloud Storage</li>
+                <li>Public Sharing</li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h2 className="text-white font-medium mb-4">Contact</h2>
+
+              <div className="space-y-2 text-white/60 text-sm">
+                <p>📞 +91 9494300465</p>
+                <p>📧 2300030809cseh1@gmail.com</p>
+              </div>
+
+              {/* Social */}
+              <div className="flex items-center gap-4 mt-5 text-white/60">
+                <a className="hover:text-white transition">
+                  <Facebook size={20} />
+                </a>
+                <a className="hover:text-white transition">
+                  <Instagram size={20} />
+                </a>
+                <a className="hover:text-white transition">
+                  <Twitter size={20} />
+                </a>
+                <a className="hover:text-white transition">
+                  <Github size={20} />
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="pt-8 text-center text-xs text-white/40">
+          A unified system for building and sharing professional career profiles
+        </div>
+
+      </div>
     </footer>
   );
 };

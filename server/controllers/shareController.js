@@ -44,38 +44,29 @@ export const generateShareLink = async (req, res) => {
         });
     }
 };
-
-// ADD THIS BELOW
 export const getSharedResume = async (req, res) => {
-    try {
+  try {
+    console.log("GET SHARED RESUME HIT");
 
-        const { shareId } = req.params;
+    const { shareId } = req.params;
 
-        const shared = await SharedResume.findOne({
-            shareId
-        });
+    const shared = await SharedResume.findOne({ shareId });
 
-        if (!shared) {
-            return res.status(404).json({
-                message: "Invalid Link"
-            });
-        }
-
-        const resume = await Resume.findById(
-            shared.resumeId
-        );
-
-        if (!resume) {
-            return res.status(404).json({
-                message: "Resume not found"
-            });
-        }
-
-        res.json(resume);
-
-    } catch (err) {
-        res.status(500).json({
-            message: err.message
-        });
+    if (!shared) {
+      return res.status(404).json({
+        message: "Invalid Link",
+      });
     }
+
+    const resume = await Resume.findById(shared.resumeId);
+
+    console.log("RESUME DATA:");
+    console.log(JSON.stringify(resume, null, 2));
+
+    res.json(resume);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
 };

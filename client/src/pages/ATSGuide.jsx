@@ -2,108 +2,119 @@ import React from "react";
 import { CheckCircle, Lightbulb, ClipboardList, FileText, Info, Award } from "lucide-react";
 
 const ATSGuide = () => {
-  const steps = [
-    "Use simple fonts (Arial, Calibri, Times New Roman)",
-    "Avoid tables, graphics, and images",
-    "Use job-specific keywords from the posting",
-    "Keep headings clear and standard (Experience, Education, Skills)",
-    "Save as PDF or DOCX with proper naming",
-  ];
-
-  const tips = [
-    "Tailor your resume for each job application",
-    "Use bullet points for responsibilities and achievements",
-    "Include measurable achievements (numbers, percentages)",
-    "Keep resume concise (1-2 pages)",
-    "Avoid fancy templates that break ATS formatting",
-  ];
-
   const faqs = [
     {
       question: "What is an ATS?",
       answer:
-        "ATS (Applicant Tracking System) is software used by companies to scan, filter, and rank resumes before a human sees them.",
-      icon: <Lightbulb className="w-12 h-12 text-purple-600 flex-shrink-0" />,
+        "Applicant Tracking System is software used by companies to scan and filter resumes before recruiters see them.",
+      icon: <Lightbulb className="w-5 h-5 text-white/60" />,
     },
     {
-      question: "Why should I make my resume ATS friendly?",
+      question: "Why ATS friendly resume matters?",
       answer:
-        "Over 90% of companies use ATS, and incorrect formatting or missing keywords can result in your resume being rejected automatically.",
-      icon: <CheckCircle className="w-12 h-12 text-green-500 flex-shrink-0" />,
+        "Most companies use ATS systems. Poor formatting or missing keywords can reject your resume automatically.",
+      icon: <CheckCircle className="w-5 h-5 text-white/60" />,
     },
     {
-      question: "Which file format is best?",
-      answer: "PDF or DOCX are preferred. Avoid image formats like JPG or PNG.",
-      icon: <FileText className="w-12 h-12 text-indigo-600 flex-shrink-0" />,
+      question: "Best file format?",
+      answer: "Use PDF or DOCX. Avoid images like JPG or PNG.",
+      icon: <FileText className="w-5 h-5 text-white/60" />,
     },
     {
-      question: "How long should my resume be?",
-      answer: "Keep it concise: 1 page for juniors, 1-2 pages for experienced professionals.",
-      icon: <Info className="w-12 h-12 text-yellow-500 flex-shrink-0" />,
+      question: "Resume length?",
+      answer: "1 page for freshers, 1–2 pages for experienced professionals.",
+      icon: <Info className="w-5 h-5 text-white/60" />,
     },
     {
-      question: "How do I include achievements?",
-      answer: "Use bullet points with numbers, percentages, or specific outcomes to show measurable results.",
-      icon: <Award className="w-12 h-12 text-pink-500 flex-shrink-0" />,
+      question: "How to show achievements?",
+      answer:
+        "Use numbers, percentages, and measurable outcomes in bullet points.",
+      icon: <Award className="w-5 h-5 text-white/60" />,
     },
   ];
 
+  const steps = [
+    "Use simple fonts like Arial, Calibri",
+    "Avoid tables, images, and complex layouts",
+    "Add job-specific keywords",
+    "Use standard headings (Experience, Education, Skills)",
+    "Export as PDF or DOCX",
+  ];
+
+  const tips = [
+    "Tailor resume for each job",
+    "Use bullet points for clarity",
+    "Add measurable results",
+    "Keep it concise (1–2 pages)",
+    "Avoid fancy templates",
+  ];
+
   return (
-    <div className="relative overflow-hidden py-20 px-6 bg-gradient-to-b from-purple-50 via-white to-indigo-50">
-      {/* Floating background shapes */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-purple-300 rounded-full blur-3xl opacity-20 animate-floatSlow -z-10"></div>
-      <div className="absolute bottom-10 right-0 w-80 h-80 bg-indigo-300 rounded-full blur-3xl opacity-20 animate-floatSlower -z-10"></div>
+    <div className="min-h-screen bg-[#0b0b12] text-white px-4 md:px-16 lg:px-24 xl:px-40 py-16">
 
-      <div className="max-w-6xl mx-auto space-y-12">
-        <h1 className="text-5xl md:text-6xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-          ATS Friendly Resume Guide
+      {/* HEADER */}
+      <div className="text-center max-w-3xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-semibold">
+          ATS Resume Guide
         </h1>
-
-        <p className="text-gray-700 text-center text-lg md:text-xl">
-          Learn how to create resumes that pass Applicant Tracking Systems and reach recruiters effectively.
+        <p className="text-white/50 mt-4 text-sm md:text-base">
+          Learn how to create resumes that pass ATS filters and reach recruiters.
         </p>
+      </div>
 
-        {/* FAQ Sections */}
-        <div className="space-y-10">
-          {faqs.map((faq, idx) => (
-            <section
-              key={idx}
-              className="flex flex-col md:flex-row items-start md:items-center bg-white shadow-lg rounded-xl p-6 md:p-8 gap-6 hover:shadow-xl transition"
-            >
+      {/* FAQ */}
+      <div className="mt-14 space-y-4 max-w-4xl mx-auto">
+        {faqs.map((faq, idx) => (
+          <div
+            key={idx}
+            className="border border-white/5 bg-white/5 rounded-xl p-5 hover:bg-white/10 transition"
+          >
+            <div className="flex items-center gap-3">
               {faq.icon}
-              <div>
-                <h2 className="text-2xl font-semibold mb-2 text-purple-700">{faq.question}</h2>
-                <p className="text-gray-600">{faq.answer}</p>
-              </div>
-            </section>
-          ))}
-        </div>
-
-        {/* Steps Section */}
-        <section className="bg-white shadow-lg rounded-xl p-6 md:p-8 hover:shadow-xl transition">
-          <div className="flex items-center mb-4 gap-4">
-            <ClipboardList className="w-12 h-12 text-indigo-600" />
-            <h2 className="text-2xl font-semibold text-indigo-700">Steps to Create ATS Friendly Resume</h2>
+              <h2 className="text-white/90 font-medium">{faq.question}</h2>
+            </div>
+            <p className="text-white/50 text-sm mt-2">{faq.answer}</p>
           </div>
-          <ol className="list-decimal pl-6 text-gray-600 space-y-2">
+        ))}
+      </div>
+
+      {/* GRID SECTIONS */}
+      <div className="grid md:grid-cols-2 gap-6 mt-14 max-w-5xl mx-auto">
+
+        {/* Steps */}
+        <div className="border border-white/5 bg-white/5 rounded-xl p-6">
+          <div className="flex items-center gap-2 mb-4 text-white/80">
+            <ClipboardList className="w-5 h-5" />
+            <h2 className="font-medium">Steps</h2>
+          </div>
+
+          <ul className="space-y-2 text-white/50 text-sm">
             {steps.map((step, idx) => (
-              <li key={idx} className="hover:text-indigo-600 transition">{step}</li>
-            ))}
-          </ol>
-        </section>
-
-        {/* Tips Section */}
-        <section className="bg-white shadow-lg rounded-xl p-6 md:p-8 hover:shadow-xl transition">
-          <div className="flex items-center mb-4 gap-4">
-            <CheckCircle className="w-12 h-12 text-green-500" />
-            <h2 className="text-2xl font-semibold text-green-700">Tips for the Best Resume</h2>
-          </div>
-          <ul className="list-disc pl-6 text-gray-600 space-y-2">
-            {tips.map((tip, idx) => (
-              <li key={idx} className="hover:text-green-600 transition">{tip}</li>
+              <li key={idx} className="flex gap-2">
+                <span className="text-white/30">•</span>
+                {step}
+              </li>
             ))}
           </ul>
-        </section>
+        </div>
+
+        {/* Tips */}
+        <div className="border border-white/5 bg-white/5 rounded-xl p-6">
+          <div className="flex items-center gap-2 mb-4 text-white/80">
+            <CheckCircle className="w-5 h-5" />
+            <h2 className="font-medium">Tips</h2>
+          </div>
+
+          <ul className="space-y-2 text-white/50 text-sm">
+            {tips.map((tip, idx) => (
+              <li key={idx} className="flex gap-2">
+                <span className="text-white/30">•</span>
+                {tip}
+              </li>
+            ))}
+          </ul>
+        </div>
+
       </div>
     </div>
   );

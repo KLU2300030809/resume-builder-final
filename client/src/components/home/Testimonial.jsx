@@ -3,51 +3,74 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Alice Johnson",
-    role: "Software Engineer",
-    comment: "The AI resume builder saved me hours! My resume looks professional and ATS-ready.",
+    name: "Yasaswi",
+    role: "Student",
+    comment:
+      "Very smooth experience. I built my resume and generated a portfolio in minutes.",
     rating: 5,
   },
   {
-    name: "Mark Stevens",
-    role: "Product Manager",
-    comment: "Super easy to use. The suggestions helped me highlight my achievements effectively.",
+    name: "Srinivasa Rao",
+    role: "Frontend Developer",
+    comment:
+      "Clean UI and fast workflow. Resume to portfolio feature works perfectly.",
     rating: 5,
   },
   {
-    name: "Sophia Lee",
-    role: "UX Designer",
-    comment: "I love the clean design and instant results. Highly recommend for job seekers!",
+    name: "Padmini",
+    role: "Student",
+    comment:
+      "Simple and effective tool for creating professional resumes quickly.",
     rating: 4,
+  },
+  {
+    name: "Sai Charan",
+    role: "Frontend Developer",
+    comment:
+      "Best way to showcase projects. Sharing portfolio links is super easy.",
+    rating: 5,
   },
 ];
 
 const Testimonials = () => {
   return (
-    <section className="relative py-20 bg-white">
-      <div className="text-center px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">What Our Users Say</h2>
-        <p className="text-sm md:text-base text-slate-500 mt-2 max-w-xl mx-auto">
-          Real feedback from professionals who built their resumes with ease.
+    <section className="py-20 bg-[#0b0b12] text-white">
+
+      {/* Header */}
+      <div className="text-center px-4 max-w-2xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-semibold">
+          What users say
+        </h2>
+        <p className="text-white/50 text-sm mt-3">
+          Feedback from students and professionals using the platform.
         </p>
       </div>
 
-      <div className="mt-12 max-w-6xl mx-auto grid gap-8 md:grid-cols-3 px-4">
+      {/* Cards */}
+      <div className="mt-12 max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4 px-4">
+
         {testimonials.map((testi, i) => (
           <div
             key={i}
-            className="group rounded-3xl p-8 bg-gradient-to-br from-purple-400 to-indigo-500 shadow-lg text-white transform transition duration-500 hover:scale-105 hover:shadow-2xl"
+            className="border border-white/5 bg-white/5 rounded-xl p-6 hover:bg-white/10 transition"
           >
-            <div className="flex items-center mb-4">
-              {Array(testi.rating)
-                .fill(0)
-                .map((_, idx) => (
-                  <Star key={idx} size={18} className="text-yellow-400 mr-1" />
-                ))}
+
+            {/* Stars */}
+            <div className="flex mb-3">
+              {Array(testi.rating).fill(0).map((_, idx) => (
+                <Star key={idx} size={14} className="text-yellow-400 mr-1" />
+              ))}
             </div>
-            <p className="text-sm mb-4 opacity-90">{testi.comment}</p>
-            <h4 className="font-semibold">{testi.name}</h4>
-            <span className="text-xs opacity-80">{testi.role}</span>
+
+            {/* Comment */}
+            <p className="text-sm text-white/60 mb-4">
+              "{testi.comment}"
+            </p>
+
+            {/* Name */}
+            <h4 className="font-medium text-white/90">{testi.name}</h4>
+            <span className="text-xs text-white/40">{testi.role}</span>
+
           </div>
         ))}
       </div>

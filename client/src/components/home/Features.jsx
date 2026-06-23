@@ -1,68 +1,97 @@
 import React from "react";
-import { Zap, FileText, Brain, ShieldCheck } from "lucide-react";
+import {
+  Zap,
+  FileText,
+  ShieldCheck,
+  Globe,
+  Share2,
+  Database,
+} from "lucide-react";
 
 const Features = () => {
   const featureCards = [
     {
-      icon: <Brain size={26} />,
-      title: "AI Content Suggestions",
-      desc: "Generate strong bullet points and summaries tailored to your job role.",
-      gradient: "from-purple-400 to-purple-600 text-white",
+      icon: <FileText size={22} />,
+      title: "Resume Builder",
+      desc: "Create and edit structured resumes with live preview.",
     },
     {
-      icon: <FileText size={26} />,
-      title: "ATS-Optimized Templates",
-      desc: "Professionally designed templates that pass applicant tracking systems.",
-      gradient: "from-indigo-400 to-indigo-600 text-white",
+      icon: <Database size={22} />,
+      title: "Resume Storage",
+      desc: "All resumes are saved and synced to your account.",
     },
     {
-      icon: <ShieldCheck size={26} />,
-      title: "Secure & Private",
-      desc: "Your resume data is encrypted and never shared without permission.",
-      gradient: "from-emerald-400 to-emerald-600 text-white",
+      icon: <Globe size={22} />,
+      title: "Portfolio Generator",
+      desc: "Auto-generate a portfolio from resume data instantly.",
     },
     {
-      icon: <Zap size={26} />,
-      title: "Fast & Easy Builder",
-      desc: "Build a complete resume in minutes with guided steps and previews.",
-      gradient: "from-orange-400 to-orange-500 text-white",
+      icon: <Share2 size={22} />,
+      title: "Public Sharing",
+      desc: "Generate a public URL to share your portfolio.",
+    },
+    {
+      icon: <Zap size={22} />,
+      title: "Fast Workflow",
+      desc: "Minimal steps from resume creation to deployment.",
+    },
+    {
+      icon: <ShieldCheck size={22} />,
+      title: "Secure System",
+      desc: "User data is protected and stored securely.",
     },
   ];
 
   return (
-    <section id="features" className="relative pt-20 pb-20 bg-white">
-      {/* Header */}
-      <div className="flex flex-col items-center text-center px-4">
-        <div className="flex items-center gap-2 text-sm text-purple-700 bg-purple-100/30 border border-purple-200 rounded-full px-6 py-1.5 mb-4">
-          <Zap size={14} />
-          <span>Simple Process</span>
-        </div>
+    <section id="features" className="relative py-24 bg-[#0b0b12] text-white">
 
-        <h2 className="mt-6 text-3xl sm:text-4xl font-bold text-slate-900">
-          Powerful Resume Features
+      {/* Background glow */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-indigo-600/20 blur-[140px] rounded-full" />
+        <div className="absolute bottom-20 right-1/4 w-[500px] h-[500px] bg-purple-600/20 blur-[140px] rounded-full" />
+      </div>
+
+      {/* Header */}
+      <div className="text-center px-4">
+        <h2 className="text-3xl md:text-5xl font-bold">
+          App Features
         </h2>
 
-        <p className="text-sm md:text-base text-slate-500 mt-2 max-w-xl">
-          Everything you need to create ATS-friendly, professional resumes with
-          AI assistance — faster and smarter.
+        <p className="mt-3 text-white/60 text-sm md:text-base max-w-xl mx-auto">
+          Everything you need to build resumes and generate portfolios in one system.
         </p>
       </div>
 
-      {/* Feature Cards */}
-      <div className="mt-12 px-4">
-        <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      {/* Feature Grid */}
+      <div className="mt-14 px-4">
+        <div className="max-w-5xl mx-auto grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
           {featureCards.map((card, i) => (
             <div
               key={i}
-              className={`group rounded-3xl p-8 text-center bg-gradient-to-br ${card.gradient} shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl`}
+              className="group p-6 rounded-xl border border-white/10
+                         bg-white/5 backdrop-blur-md
+                         hover:bg-white/10 hover:border-white/20
+                         transition duration-300 hover:-translate-y-1"
             >
-              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white/20 group-hover:bg-white/30 text-white text-2xl shadow-inner transition">
-                {card.icon}
+              {/* Icon */}
+              <div className="flex items-center gap-3">
+                <div className="text-indigo-400 group-hover:text-indigo-300">
+                  {card.icon}
+                </div>
+
+                <h3 className="text-base font-semibold">
+                  {card.title}
+                </h3>
               </div>
-              <h3 className="font-semibold text-lg mb-2">{card.title}</h3>
-              <p className="text-sm opacity-90">{card.desc}</p>
+
+              {/* Description */}
+              <p className="mt-3 text-sm text-white/60 leading-relaxed">
+                {card.desc}
+              </p>
             </div>
           ))}
+
         </div>
       </div>
     </section>

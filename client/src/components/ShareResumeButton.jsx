@@ -41,18 +41,14 @@ function ShareResumeButton({ resumeId }) {
 
       <button
         onClick={generateLink}
-        className="
-          flex items-center gap-2
-          px-4 py-2
-          rounded-lg
-          bg-gradient-to-br
-          from-blue-100
-          to-blue-200
-          text-blue-700
-          hover:ring
-          hover:ring-blue-300
-          transition
-        "
+      className="
+flex items-center gap-2 px-4 py-2 text-xs font-medium
+bg-gradient-to-r from-violet-600 to-indigo-600
+text-white rounded-lg
+shadow-md shadow-violet-500/20
+hover:shadow-violet-500/40 hover:scale-105
+transition-all duration-200
+"
       >
         <Share2 size={16} />
         Share Resume

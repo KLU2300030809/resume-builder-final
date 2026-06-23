@@ -89,27 +89,27 @@ setPortfolioData({
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
+<div className="min-h-screen bg-[#0b0b12] text-white p-6">
 
       <div className="grid grid-cols-12 gap-6">
 
         {/* ================= LEFT PANEL ================= */}
-        <div className="col-span-4 bg-white p-5 rounded-xl shadow h-fit">
+        <div className="col-span-4 bg-white/5 border border-white/10 backdrop-blur-xl p-5 rounded-2xl shadow-2xl h-fit">
 
           <h1 className="text-xl font-bold mb-5 flex items-center gap-2">
-            <Sparkles />
+          <Sparkles className="text-violet-400" />
             Portfolio Builder
           </h1>
 
           {/* RESUME SELECT */}
           <div className="mb-5 relative">
-            <label className="text-sm font-medium mb-2 block">
+            <label className="text-sm font-medium text-white/80 mb-2 block">
               Select Resume
             </label>
 
             <button
               onClick={() => setShowResumeList(!showResumeList)}
-              className="w-full border rounded-lg px-3 py-2 text-left bg-gray-50"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-left text-white hover:bg-white/10"
             >
               {selectedResumeId
                 ? resumes.find(r => r._id === selectedResumeId)?.title
@@ -117,7 +117,7 @@ setPortfolioData({
             </button>
 
             {showResumeList && (
-              <div className="absolute z-50 mt-2 w-full bg-white border rounded-lg shadow max-h-60 overflow-y-auto">
+              <div className="absolute z-50 mt-2 w-full bg-[#0f0f1a] border border-white/10 rounded-lg shadow-2xl backdrop-blur-xl max-h-60 overflow-y-auto">
                 {resumes.map((resume) => (
                   <div
                     key={resume._id}
@@ -143,7 +143,7 @@ projects: selected?.project || [],
                         contact: selected?.personal_info || {}
                       });
                     }}
-                    className="px-4 py-2 hover:bg-indigo-50 cursor-pointer"
+className="px-4 py-2 text-white/80 hover:bg-violet-500/10 cursor-pointer"
                   >
                     {resume.title || "Untitled Resume"}
                   </div>
@@ -180,21 +180,20 @@ projects: selected?.project || [],
           <button
             onClick={handleGenerate}
             disabled={loading}
-            className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700"
-          >
+className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white py-2 rounded-lg hover:opacity-90 transition"  >
             {loading ? "Generating..." : "Generate Portfolio"}
           </button>
 
           {published && (
             <div className="flex gap-2 mt-4">
-              <button onClick={copyLink} className="text-sm border px-2 py-1 rounded">
+              <button onClick={copyLink} className="text-sm bg-white/5 border border-white/10 text-white/80 px-3 py-2 rounded-lg hover:bg-white/10">
                 Copy Link
               </button>
 
               <a
                 href={portfolioUrl}
                 target="_blank"
-                className="text-sm bg-green-600 text-white px-2 py-1 rounded"
+className="text-sm bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-3 py-2 rounded-lg"
               >
                 Visit
               </a>
@@ -204,7 +203,7 @@ projects: selected?.project || [],
         </div>
 
         {/* ================= RIGHT PANEL ================= */}
-        <div className="col-span-8 bg-white p-5 rounded-xl shadow min-h-[80vh]">
+        <div className="col-span-8 bg-white/5 border border-white/10 backdrop-blur-xl p-5 rounded-2xl shadow-2xl min-h-[80vh]">
 
           {portfolioData ? (
             <PortfolioPreview
@@ -213,7 +212,7 @@ projects: selected?.project || [],
               accentColor={accentColor}
             />
           ) : (
-            <div className="h-full flex items-center justify-center text-gray-400">
+            <div className="h-full flex items-center justify-center text-white/40">
               Select a resume to preview portfolio
             </div>
           )}

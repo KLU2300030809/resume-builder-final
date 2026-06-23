@@ -6,7 +6,6 @@ import { logout } from "../app/features/authSlice";
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { user } = useSelector((state) => state.auth);
 
   const logoutUser = () => {
@@ -15,30 +14,39 @@ const Navbar = () => {
   };
 
   return (
-    <div className="shadow bg-white">
-      <nav className="flex items-center justify-between max-w-7xl mx-auto px-4 py-3.5 text-slate-800">
+    <div className="bg-[#0b0b12] border-b border-white/10 backdrop-blur-xl">
+      <nav className="flex items-center justify-between max-w-7xl mx-auto px-4 py-3.5 text-white">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold">
-            AI
-          </div>
-          <span className="text-lg font-semibold text-slate-800">
-            ResumeBuilder
+        
+
+          <span className="text-lg font-semibold text-white">
+            Resume2Portfolio
           </span>
         </Link>
 
         {/* Right section */}
         <div className="flex items-center gap-4 text-sm">
-          {user && <p className="max-sm:hidden">Hi, {user.name}</p>}
+
+          {user && (
+            <p className="max-sm:hidden text-white/60">
+              Hi, <span className="text-white font-medium">{user.name}</span>
+            </p>
+          )}
+
           {user && (
             <button
               onClick={logoutUser}
-              className="bg-white hover:bg-slate-50 border border-gray-300 px-7 py-1.5 rounded-full active:scale-95 transition-all"
+              className="px-6 py-1.5 rounded-full
+              bg-white/5 border border-white/10
+              text-white/80 hover:text-white hover:bg-white/10
+              active:scale-95 transition-all"
             >
               Logout
             </button>
           )}
+
         </div>
 
       </nav>

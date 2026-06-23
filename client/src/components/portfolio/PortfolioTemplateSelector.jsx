@@ -42,8 +42,10 @@ const PortfolioTemplateSelector = ({ selectedTemplate, onChange }) => {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center gap-2 text-sm text-blue-600 bg-gradient-to-br
-        from-blue-50 to-blue-100 ring-1 ring-blue-300 hover:ring-blue-400
+        className="flex items-center gap-2 text-sm text-white/80
+bg-white/5
+border border-white/10
+hover:bg-violet-500/10
         transition-all px-3 py-2 rounded-lg"
       >
         <Layout size={14} />
@@ -52,13 +54,16 @@ const PortfolioTemplateSelector = ({ selectedTemplate, onChange }) => {
 
       {/* ---------------- DROPDOWN PANEL ---------------- */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-72 z-[9999] bg-white rounded-md border border-gray-200 shadow-lg p-3 space-y-3 max-h-80 overflow-y-auto">
+        <div className="absolute top-full left-0 mt-2 w-72 z-[9999] bg-[#0f0f1a]
+border border-white/10
+backdrop-blur-xl
+shadow-2xl">
 
           {/* CLOSE BUTTON (ONLY WAY TO CLOSE) */}
           <div className="flex justify-end mb-2">
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-full hover:bg-gray-100 transition"
+              className="p-1 rounded-full text-white/60 hover:text-white hover:bg-violet-500/10 transition"
             >
               <X size={16} />
             </button>
@@ -75,27 +80,27 @@ const PortfolioTemplateSelector = ({ selectedTemplate, onChange }) => {
                 className={`relative p-3 border rounded-md cursor-pointer transition-all
                   ${
                     isSelected
-                      ? "border-green-400 bg-green-50"
-                      : "border-gray-300 hover:border-gray-400 hover:bg-gray-100"
+                      ? "border-violet-500/50 bg-violet-500/10"
+                      : "border-white/10 hover:border-violet-500/30 hover:bg-violet-500/10"
                   }
                 `}
               >
                 {/* SELECTED CHECK ICON */}
                 {isSelected && (
                   <div className="absolute top-2 right-2">
-                    <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                    <div className="w-5 h-5 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full flex items-center justify-center">
                       <Check className="w-3 h-3 text-white" />
                     </div>
                   </div>
                 )}
 
                 {/* TEMPLATE NAME */}
-                <h4 className="font-medium text-gray-800">
+                <h4 className="font-medium text-white">
                   {template.name}
                 </h4>
 
                 {/* TEMPLATE DESCRIPTION */}
-                <p className="mt-2 p-2 bg-gray-50 rounded text-xs text-gray-500 italic">
+                <p className="mt-2 p-2 bg-white/5 border border-white/10 rounded text-xs text-white/50 italic">
                   {template.preview}
                 </p>
               </div>

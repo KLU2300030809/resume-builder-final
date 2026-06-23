@@ -159,176 +159,202 @@ const saveEdit = async (e) => {
   /* ------------------ UI (UNCHANGED) ------------------ */
   
   /* ------------------ RENDER ------------------ */
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50">
-      <div className="max-w-7xl mx-auto px-6 py-10">
-        {/* HEADER */}
-        <div className="mb-8 flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold">
-            AI
-          </div>
-          <h1 className="text-3xl font-bold text-slate-800">ResumeBuilder Dashboard</h1>
-        </div>
-        {user && <p className="text-slate-600 mb-2">Welcome, {user.name}</p>}
-        <p className="text-slate-500 mt-1">Create, upload, and manage your resumes</p>
+return (
+  <div className="min-h-screen bg-[#0b0b12] text-white">
 
-      <div className="flex gap-6 flex-wrap mt-6">
-  <ActionCard
-    icon={<PlusIcon />}
-    label="Create Resume"
-    onClick={() => setShowCreateResume(true)}
-  />
-   {/* ✅ ADD THIS BACK */}
-  <ActionCard
-    icon={<Sparkles className="text-white" />}
-    label="Generate Portfolio"
-    onClick={() => {
-      toast.success("Generate Portfolio clicked");
-      navigate("/app/portfolio-generator"); // optional route
-    }}
-  />
+    <div className="max-w-7xl mx-auto px-6 py-10">
 
-</div>
+      {/* HEADER */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-white">
+          Resume2Portfolio Dashboard
+        </h1>
 
-        {/* LOADING STATE */}
-        {isLoading && <p className="mt-6 text-slate-500">Loading resumes...</p>}
-
-        {/* RESUME GRID */}
-        {!isLoading && resumes.length > 0 && (
-          <>
-            <h2 className="mt-12 mb-4 text-lg font-semibold text-slate-700">My Resumes</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-              {resumes.map((resume, index) => {
-                const gradient = accentColors[index % accentColors.length];
-                return (
-                  <div
-                    key={resume._id}
-onClick={() => {
-  if (resume.resumeFile) {
-    window.open(resume.resumeFile, "_blank");
-  } else {
-    navigate(`/app/builder/${resume._id}`);
-  }
-}}
-                    className="group relative rounded-2xl p-[1px] cursor-pointer hover:scale-105 transition-transform duration-300"
-                  >
-                    <div
-                      className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${gradient} opacity-20 blur-xl group-hover:opacity-40 transition-all duration-500`}
-                    />
-                    <div className="relative bg-white rounded-2xl p-4 h-44 flex flex-col justify-between shadow-sm group-hover:shadow-xl transition-all duration-300">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">
-                        AI
-                      </div>
-     <div className="flex flex-col items-center justify-center flex-1">
-  <p className="font-medium text-slate-800 text-center text-lg">
-    {resume.title}
-  </p>
-
-  <p className="text-xs text-slate-400 mt-2 text-center">
-    Updated {new Date(resume.updatedAt).toLocaleDateString()}
-  </p>
-</div>    
-                      <div className="absolute top-2 right-2 hidden group-hover:flex gap-1">
-                        <PencilIcon
-                          className="size-8 p-1.5 rounded-lg hover:bg-slate-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            openEditModal(resume);
-                          }}
-                        />
-                        <TrashIcon
-                          className="size-8 p-1.5 rounded-lg hover:bg-red-50 text-red-500"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            confirmDelete(resume._id);
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </>
+        {user && (
+          <p className="text-white/60 mt-2">
+            Welcome, {user.name}
+          </p>
         )}
       </div>
 
-      {/* ---------------- MODALS ---------------- */}
-      {showCreateResume && (
-        <Modal title="Create New Resume" onClose={() => setShowCreateResume(false)}>
-          <form onSubmit={createResume}>
-            <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Resume title"
-              required
-              className="w-full h-11 border rounded-lg px-4 focus:ring-2 focus:ring-purple-400"
-            />
-            <ModalActions onCancel={() => setShowCreateResume(false)} />
-          </form>
-        </Modal>
+      {/* ACTION CARDS */}
+      <div className="flex gap-6 flex-wrap mt-6">
+
+        <ActionCard
+          icon={<PlusIcon />}
+          label="Create Resume"
+          onClick={() => setShowCreateResume(true)}
+        />
+
+        <ActionCard
+          icon={<Sparkles className="text-white" />}
+          label="Generate Portfolio"
+          onClick={() => {
+            toast.success("Generate Portfolio clicked");
+            navigate("/app/portfolio-generator");
+          }}
+        />
+
+      </div>
+
+      {/* LOADING */}
+      {isLoading && (
+        <p className="mt-6 text-white/50">Loading resumes...</p>
       )}
 
-  
-      {showEditResume && (
-  <Modal title="Edit Resume" onClose={() => setShowEditResume(false)}>
-    <form onSubmit={saveEdit}>
-      <input
-        value={editTitle}
-        onChange={(e) => setEditTitle(e.target.value)}
-        placeholder="Resume title"
-        required
-        className="w-full h-11 border rounded-lg px-4 focus:ring-2 focus:ring-purple-400"
-      />
+      {/* RESUME GRID */}
+      {!isLoading && resumes.length > 0 && (
+        <>
+          <h2 className="mt-12 mb-4 text-lg font-semibold text-white/80">
+            My Resumes
+          </h2>
 
-      <ModalActions onCancel={() => setShowEditResume(false)} />
-    </form>
-  </Modal>
-)}
-      {showDeleteConfirm && (
-        <Modal title="Delete Resume?" onClose={() => setShowDeleteConfirm(false)}>
-          <p className="text-slate-600 mb-6">This action cannot be undone.</p>
-          <div className="flex justify-end gap-3">
-            <button
-              className="px-4 py-2 border rounded-lg"
-              onClick={() => setShowDeleteConfirm(false)}
-            >
-              Cancel
-            </button>
-            <button
-              className="px-5 py-2 bg-red-500 text-white rounded-lg"
-              onClick={deleteResume}
-            >
-              Delete
-            </button>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+
+            {resumes.map((resume) => (
+              <div
+                key={resume._id}
+                onClick={() => {
+                  if (resume.resumeFile) {
+                    window.open(resume.resumeFile, "_blank");
+                  } else {
+                    navigate(`/app/builder/${resume._id}`);
+                  }
+                }}
+                className="group relative rounded-2xl p-[1px] cursor-pointer hover:scale-105 transition-transform duration-300"
+              >
+
+                {/* CARD */}
+                <div className="relative bg-white/5 border border-white/10 rounded-2xl p-4 h-44 flex flex-col justify-between backdrop-blur-md shadow-lg group-hover:bg-white/10 transition-all duration-300">
+
+                  <div className="flex flex-col items-center justify-center flex-1">
+                    <p className="font-medium text-white text-center text-lg">
+                      {resume.title}
+                    </p>
+
+                    <p className="text-xs text-white/40 mt-2 text-center">
+                      Updated {new Date(resume.updatedAt).toLocaleDateString()}
+                    </p>
+                  </div>
+
+                  {/* ACTIONS */}
+                  <div className="absolute top-2 right-2 hidden group-hover:flex gap-1">
+
+                    <PencilIcon
+                      className="size-8 p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openEditModal(resume);
+                      }}
+                    />
+
+                    <TrashIcon
+                      className="size-8 p-1.5 rounded-lg text-red-400 hover:bg-red-500/10"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        confirmDelete(resume._id);
+                      }}
+                    />
+                  </div>
+
+                </div>
+              </div>
+            ))}
+
           </div>
-        </Modal>
+        </>
       )}
+
     </div>
-  );
+
+    {/* MODALS (UNCHANGED) */}
+    {showCreateResume && (
+      <Modal title="Create New Resume" onClose={() => setShowCreateResume(false)}>
+        <form onSubmit={createResume}>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Resume title"
+            required
+            className="w-full h-11 bg-white/5 border border-white/10 rounded-lg px-4 text-white focus:ring-2 focus:ring-violet-500"
+          />
+          <ModalActions onCancel={() => setShowCreateResume(false)} />
+        </form>
+      </Modal>
+    )}
+
+    {showEditResume && (
+      <Modal title="Edit Resume" onClose={() => setShowEditResume(false)}>
+        <form onSubmit={saveEdit}>
+          <input
+            value={editTitle}
+            onChange={(e) => setEditTitle(e.target.value)}
+            placeholder="Resume title"
+            required
+            className="w-full h-11 bg-white/5 border border-white/10 rounded-lg px-4 text-white focus:ring-2 focus:ring-violet-500"
+          />
+          <ModalActions onCancel={() => setShowEditResume(false)} />
+        </form>
+      </Modal>
+    )}
+
+    {showDeleteConfirm && (
+      <Modal title="Delete Resume?" onClose={() => setShowDeleteConfirm(false)}>
+        <p className="text-white/60 mb-6">This action cannot be undone.</p>
+
+        <div className="flex justify-end gap-3">
+          <button
+            className="px-4 py-2 border border-white/10 rounded-lg text-white/70 hover:text-white"
+            onClick={() => setShowDeleteConfirm(false)}
+          >
+            Cancel
+          </button>
+
+          <button
+            className="px-5 py-2 bg-red-500/80 hover:bg-red-500 text-white rounded-lg"
+            onClick={deleteResume}
+          >
+            Delete
+          </button>
+        </div>
+      </Modal>
+    )}
+
+  </div>
+);
 };
 
 /* ------------------ SMALL COMPONENTS ------------------ */
 const ActionCard = ({ icon, label, onClick }) => (
   <button
     onClick={onClick}
-    className="w-44 h-44 bg-white rounded-2xl border border-dashed border-indigo-300 flex flex-col items-center justify-center gap-3 hover:shadow-xl hover:-translate-y-1 transition-transform duration-300"
+    className="w-44 h-44 bg-white/5 border border-white/10 backdrop-blur-xl
+    rounded-2xl flex flex-col items-center justify-center gap-3
+    hover:bg-white/10 hover:-translate-y-1 transition-transform duration-300"
   >
-    <div className="p-3 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 text-white">{icon}</div>
-    <p className="text-sm font-medium text-slate-700">{label}</p>
+    <div className="p-3 rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-white">
+      {icon}
+    </div>
+
+    <p className="text-sm font-medium text-white/80">{label}</p>
   </button>
 );
 
 const Modal = ({ title, children, onClose }) => (
-  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-    <div className="bg-white w-full max-w-md rounded-2xl p-6 shadow-xl relative">
+  <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="bg-[#0f0f1a] border border-white/10 w-full max-w-md rounded-2xl p-6 shadow-2xl relative text-white">
+
       <button
         onClick={onClose}
-        className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+        className="absolute top-3 right-3 text-white/40 hover:text-white"
       >
         ✕
       </button>
-      <h2 className="text-xl font-semibold mb-4">{title}</h2>
+
+      <h2 className="text-xl font-semibold mb-4 text-white">
+        {title}
+      </h2>
+
       {children}
     </div>
   </div>
@@ -336,10 +362,18 @@ const Modal = ({ title, children, onClose }) => (
 
 const ModalActions = ({ onCancel }) => (
   <div className="flex justify-end gap-3 mt-6">
-    <button onClick={onCancel} type="button" className="px-4 py-2 border rounded-lg">
+    <button
+      onClick={onCancel}
+      type="button"
+      className="px-4 py-2 border border-white/10 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition"
+    >
       Cancel
     </button>
-    <button type="submit" className="px-5 py-2 bg-purple-500 text-white rounded-lg">
+
+    <button
+      type="submit"
+      className="px-5 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-lg hover:opacity-90 transition"
+    >
       Save
     </button>
   </div>

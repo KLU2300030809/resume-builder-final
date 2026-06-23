@@ -21,8 +21,10 @@ const ColorPicker = ({ selectedColor, onChange }) => {
       {/* Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 text-sm text-purple-600 bg-gradient-to-br from-purple-50 to-purple-100
-        ring-1 ring-purple-300 hover:ring-purple-400 transition-all px-3 py-2 rounded-lg"
+        className="flex items-center gap-1 text-sm drop-shadow-md/80
+bg-white/5
+border border-white/10
+hover:bg-violet-500/10 transition-all px-3 py-2 rounded-lg"
       >
         <Palette size={16} />
         <span className="max-sm:hidden">Accent</span>
@@ -30,12 +32,13 @@ const ColorPicker = ({ selectedColor, onChange }) => {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-64 p-3 bg-white border border-gray-200 rounded-md shadow-sm z-10">
+        <div className="absolute top-full left-0 mt-2 w-64 p-3 bg-[#0f0f1a] border border-white/10 rounded-md
+backdrop-blur-xl shadow-2xl z-10">
           {/* Close button */}
           <div className="flex justify-end mb-3">
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-full hover:bg-gray-100 transition"
+              className="p-1 rounded-full text-white/60 hover:text-white hover:bg-violet-500/10 transition"
             >
               <X size={16} />
             </button>
@@ -50,7 +53,7 @@ const ColorPicker = ({ selectedColor, onChange }) => {
                 onClick={() => onChange(color.value)} // only change, do not close
               >
                 <div
-                  className="w-12 h-12 rounded-full border-2 border-transparent group-hover:border-black/25 transition-colors"
+                  className="w-12 h-12 rounded-full border-2 border-transparent group-hover:border-violet-400 transition-colors"
                   style={{ backgroundColor: color.value }}
                 />
 
@@ -61,7 +64,7 @@ const ColorPicker = ({ selectedColor, onChange }) => {
                   </div>
                 )}
 
-                <p className="text-xs text-center mt-1 text-gray-600">
+                <p className="text-xs text-center mt-1 text-white/60">
                   {color.name}
                 </p>
               </div>

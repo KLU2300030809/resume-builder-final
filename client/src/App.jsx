@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PortfolioPreview from "./pages/PortfolioPreview";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
+import Loader from "./components/Loader";
 import Dashboard from "./pages/Dashboard";
 import ResumeBuilder from "./pages/ResumeBuilder";
 import Preview from "./pages/Preview";
@@ -15,7 +16,7 @@ import Footer from "./components/home/Footer";
 import Login from "./pages/Login";
 import SharedResume from "./pages/SharedResume";
 import api from "./configs/api";
-import { login, setLoading } from "./app/features/authSlice";
+import { login,setLoading } from "./app/features/authSlice";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import PortfolioPublic from "./pages/PortfolioPublic";
@@ -55,7 +56,7 @@ const App = () => {
     getUserData();
   }, []);
 
-  if (loading) return <div>Loading...</div>; // wait until user data fetched
+  if (loading) return <Loader />; // wait until user data fetched
 
   return (
     <>

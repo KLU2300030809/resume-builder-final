@@ -100,7 +100,7 @@ export default function SkillsForm({
     <div className="space-y-4">
 
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold">
+        <h2 className="text-xl font-semibold text-white">
           Skills
         </h2>
 
@@ -110,8 +110,7 @@ export default function SkillsForm({
   onClick={enhanceSkills}
   className="flex items-center gap-2 text-sm font-medium
   px-3 py-1.5 rounded-full
-  bg-purple-50 text-purple-600
-  hover:bg-purple-100 transition
+bg-white/5 text-white/80 border border-white/10 hover:bg-white/10 transition
   disabled:opacity-50"
 >
   {loading ? (
@@ -133,14 +132,16 @@ export default function SkillsForm({
           }
           onKeyDown={handleKeyDown}
           placeholder="Add a skill..."
-          className="flex-1 border rounded p-2"
+          className="flex-1 bg-white/5 border border-white/10 rounded-lg p-2 text-white
+placeholder:text-white/40
+focus:ring-2 focus:ring-violet-500/30
+focus:border-violet-500 outline-none"
         />
 
          <button
           onClick={addSkill}
           className="flex items-center gap-2 px-3 py-2 text-sm
-          bg-purple-100 text-purple-700 rounded-lg
-          hover:bg-purple-200 transition"
+        bg-gradient-to-r from-violet-600 to-indigo-600 text-white transition"
         >
           <Plus className="w-4 h-4" />
           Add Skill
@@ -149,14 +150,14 @@ export default function SkillsForm({
 
       <div className="flex flex-wrap gap-2">
         {(skills || []).length === 0 ? (
-          <p className="text-gray-500">
+          <p className="text-white/50">
             No skills added yet.
           </p>
         ) : (
           (skills || []).map((skill, index) => (
             <div
               key={index}
-              className="flex items-center gap-2 px-3 py-1 bg-blue-100 rounded-full"
+              className="flex items-center gap-2 px-3 py-1 bg-violet-500/20 border border-violet-500/30 rounded-full text-violet-200"
             >
               <span>{skill}</span>
 
@@ -165,7 +166,7 @@ export default function SkillsForm({
                 onClick={() =>
                   removeSkill(skill)
                 }
-                className="font-bold text-red-500"
+                className="font-bold text-red-400 hover:text-red-300"
               >
                 ×
               </button>

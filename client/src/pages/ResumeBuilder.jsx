@@ -116,7 +116,7 @@ const [isPdfMode, setIsPdfMode] = useState(false);
         },
       };
 
-const { data } = await api.post("/api/resumes/update", payload, {
+const { data } = await api.post("/resumes/update", payload, {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",
@@ -213,29 +213,34 @@ setIsPdfMode(true);
   setIsPdfMode(false);
   document.body.classList.remove("pdf-mode");
 };
-console.log("RESUME DATA:", resumeData);
+console.log("PREVIEW TEMPLATE:", resumeData.template);
+console.log("PREVIEW COLOR:", resumeData.accent_color);
+console.log("PREVIEW DATA:", resumeData);
+
   return (
     <>
       {/* HEADER */}
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        <Link
-          to="/app"
-          className="inline-flex gap-2 items-center text-slate-500 hover:text-slate-700 transition"
-        >
-          <ArrowLeftIcon className="size-4" />
-          Back to Dashboard
-        </Link>
-      </div>
+     <div className="min-h-screen bg-[#0b0b12] text-white">
 
-      <div className="max-w-7xl mx-auto px-4 pb-8">
-        <div className="grid lg:grid-cols-12 gap-8">
+  {/* HEADER - NOW INSIDE DARK BACKGROUND */}
+  <div className="max-w-7xl mx-auto px-4 py-6">
+    <Link
+      to="/app"
+      className="inline-flex gap-2 items-center text-white/60 hover:text-white transition"
+    >
+      <ArrowLeftIcon className="size-4" />
+      Back to Dashboard
+    </Link>
+  </div>
+
+  {/* MAIN CONTENT */}
+  <div className="grid lg:grid-cols-12 gap-8"></div>    <div className="grid lg:grid-cols-12 gap-8">
 
           {/* LEFT FORM */}
           <div className="lg:col-span-5">
-            <div className="bg-white rounded-lg shadow-sm border p-6 pt-4">
-
+       <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl shadow-lg p-6 pt-4 text-white">
               {/* NAV */}
-              <div className="flex justify-between items-center mb-6 border-b pb-2">
+<div className="flex justify-between items-center mb-6 border-b border-white/10 pb-2 text-white">
                 <div className="flex gap-2">
                   <TemplateSelector
                     selectedTemplate={resumeData.template}
@@ -251,7 +256,7 @@ console.log("RESUME DATA:", resumeData);
                   />
                 </div>
 
-                <h2 className="font-semibold">{activeSection.name}</h2>
+<h2 className="font-semibold text-white/80">{activeSection.name}</h2>
 
                 <div className="flex gap-2">
                   {activeSectionIndex !== 0 && (
@@ -362,9 +367,7 @@ console.log("RESUME DATA:", resumeData);
               <div className="mt-6">
                 <button
                   onClick={handleSaveClick}
-                  className="bg-gradient-to-br from-green-100 to-green-200 ring-green-300
-                  text-green-600 ring hover:ring-green-400 transition rounded-md px-6 py-2 text-sm"
-                >
+                  className="bg-gradient-to-br from-violet-600 to-indigo-600 text-white rounded-md px-6 py-2 text-sm hover:opacity-90 transition">
                   Save Changes
                 </button>
               </div>
@@ -376,40 +379,34 @@ console.log("RESUME DATA:", resumeData);
 
             <div className="flex items-center gap-2 mb-4">
 {resumeData.public && (
-  <ShareResumeButton
-    resumeId={resumeId}
-  />
+ <ShareResumeButton resumeId={resumeId} />
 )}
 
-              <button
-                onClick={changeResumeVisibility}
-                className="flex items-center p-2 px-4 gap-2 text-xs
-                bg-gradient-to-br from-green-100 to-green-200
-                text-green-600 rounded-lg ring-green-300 hover:ring transition-colors"
-              >
-                {resumeData.public ? <EyeIcon className="size-4" /> : <EyeOffIcon className="size-4" />}
-                {resumeData.public ? "Public" : "Private"}
-              </button>
+          
 
-              <button
-                onClick={handleDownload}
-                className="flex items-center p-2 px-4 gap-2 text-xs
-                bg-gradient-to-br from-purple-100 to-purple-200
-                text-purple-600 rounded-lg ring-purple-300 hover:ring transition-colors"
-              >
-                <DownloadIcon className="size-4" />
-                Download
-              </button>
+           <button
+  onClick={handleDownload}
+  className="flex items-center gap-2 px-4 py-2 text-xs font-medium
+  bg-gradient-to-r from-violet-600 to-indigo-600
+  text-white rounded-lg
+  shadow-md shadow-violet-500/20
+  hover:shadow-violet-500/40 hover:scale-105
+  transition-all duration-200"
+>
+  <DownloadIcon className="size-4" />
+  Download
+</button>
             </div>
 
             {/* IMPORTANT: WRAPPER FIX */}
-            <div ref={resumeRef}>
-             <ResumePreview
-  data={resumeData}
-  template={resumeData.template}
-  accentColor={resumeData.accent_color}
-  isPdfMode={isPdfMode}
-/>
+         <div ref={resumeRef}>
+  <ResumePreview
+    data={resumeData}
+    template={resumeData.template}
+    accentColor={resumeData.accent_color}
+    isPdfMode={isPdfMode}
+  />
+
             </div>
 
           </div>

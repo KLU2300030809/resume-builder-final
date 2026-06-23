@@ -1,49 +1,86 @@
-// src/components/home/CallToAction.jsx
 import React from "react";
-import { FileText, Zap } from "lucide-react";
+import { FileText, Globe, Zap, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const CallToAction = () => {
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    navigate("/app"); // ✅ CORRECT PATH
-  };
-
   return (
-    <section className="flex flex-col items-center justify-center mx-auto px-4 sm:px-6 max-w-5xl w-full text-center rounded-2xl py-20 bg-white shadow-lg">
-      {/* Gradient Icon */}
-      <div className="mb-6">
-        <div className="p-5 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 inline-flex items-center justify-center shadow-lg transform transition duration-500 hover:scale-110">
-          <FileText size={32} className="text-white" />
-        </div>
+    <section className="relative w-full py-24 flex justify-center overflow-hidden bg-[#0b0b12] text-white">
+
+      {/* Glow background (same system as banner/features) */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-10 left-1/3 w-[500px] h-[500px] bg-violet-600/20 blur-[140px] rounded-full" />
+        <div className="absolute bottom-10 right-1/3 w-[500px] h-[500px] bg-indigo-600/20 blur-[140px] rounded-full" />
       </div>
 
-      <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 max-w-2xl">
-        Create Your Professional Resume Instantly
-      </h1>
-      <p className="text-sm md:text-base text-slate-500 mt-3 max-w-lg">
-        Fill in your details and let our AI-powered builder craft a professional
-        resume that stands out.
-      </p>
+      {/* Glass Card */}
+      <div className="max-w-4xl w-full mx-4 text-center rounded-3xl p-10 md:p-16
+                      bg-white/5 backdrop-blur-xl border border-white/10
+                      shadow-2xl shadow-black/40">
 
-      {/* Decorative Highlights */}
-      <div className="mt-8 flex flex-wrap justify-center gap-6">
-        <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-400 to-indigo-500 text-white rounded-full font-medium shadow-md transform transition duration-300 hover:scale-105">
-          <Zap size={20} /> AI Powered
+        {/* Icon */}
+        <div className="flex justify-center mb-6">
+          <div className="p-5 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 shadow-lg">
+            <Globe size={30} className="text-white" />
+          </div>
         </div>
-        <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-400 to-emerald-500 text-white rounded-full font-medium shadow-md transform transition duration-300 hover:scale-105">
-          <FileText size={20} /> ATS Friendly
+
+        {/* Heading */}
+        <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+          Turn Your Resume into a{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-500">
+            Live Portfolio
+          </span>
+        </h1>
+
+        {/* Subtext */}
+        <p className="mt-5 text-white/60 text-sm md:text-base max-w-2xl mx-auto">
+          Build resumes, store them in the cloud, and generate production-ready
+          portfolio websites with a single click.
+        </p>
+
+        {/* Feature highlights (app-style, not pills) */}
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+          <div className="p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
+            <FileText size={18} className="text-violet-400" />
+            <p className="mt-2 text-sm font-medium">Resume Builder</p>
+            <p className="text-xs text-white/50 mt-1">Structured, ATS-ready resumes</p>
+          </div>
+
+          <div className="p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
+            <Globe size={18} className="text-indigo-400" />
+            <p className="mt-2 text-sm font-medium">Portfolio Generator</p>
+            <p className="text-xs text-white/50 mt-1">Auto deploy from resume data</p>
+          </div>
+
+          <div className="p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
+            <Zap size={18} className="text-emerald-400" />
+            <p className="mt-2 text-sm font-medium">Instant Sharing</p>
+            <p className="text-xs text-white/50 mt-1">Public links for recruiters</p>
+          </div>
+
         </div>
+
+        {/* CTA Button (app style) */}
+        <div className="mt-12 flex justify-center">
+          <button
+            onClick={() => navigate("/app")}
+            className="group flex items-center gap-2 px-8 py-3 rounded-full
+                       bg-gradient-to-r from-violet-600 to-indigo-600
+                       font-semibold shadow-lg hover:shadow-indigo-500/30
+                       hover:scale-105 active:scale-95 transition"
+          >
+            Open Dashboard
+            <ArrowRight
+              size={18}
+              className="group-hover:translate-x-1 transition"
+            />
+          </button>
+        </div>
+
       </div>
-
-      {/* CTA Button */}
-      <button
-        onClick={handleGetStarted}
-        className="mt-10 px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold shadow-lg hover:opacity-90 active:scale-95 transition"
-      >
-        Get Started
-      </button>
     </section>
   );
 };

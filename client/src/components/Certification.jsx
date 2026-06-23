@@ -39,7 +39,7 @@ export default function Certification({
       <div className="flex justify-between items-center">
         <div>
           <h3 className="text-lg font-semibold flex items-center gap-2">
-            <Award className="w-5 h-5 text-purple-600" />
+            <Award className="w-5 h-5 text-violet-400" />
             Certifications
           </h3>
 
@@ -50,7 +50,7 @@ export default function Certification({
 
         <button
           onClick={addCertification}
-          className="flex items-center gap-2 px-3 py-2 text-sm bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200"
+          className="flex items-center gap-2 px-3 py-2 text-sm bg-gradient-to-r from-violet-600 to-indigo-600 text-white"
         >
           <Plus size={16} />
           Add Certification
@@ -58,23 +58,23 @@ export default function Certification({
       </div>
 
       {certifications.length === 0 ? (
-        <div className="text-center py-10 border rounded-xl">
+        <div className="text-center py-10 border border-white/10 rounded-xl bg-white/5 text-white/50">
           No certifications added
         </div>
       ) : (
         certifications.map((cert, index) => (
           <div
             key={cert.id || index}
-            className="border rounded-xl p-4 space-y-3 bg-white"
+            className="border border-white/10 rounded-xl p-4 space-y-3 bg-white/5 backdrop-blur-md text-white"
           >
             <div className="flex justify-between items-center">
-              <h4 className="font-medium">
+              <h4 className="font-medium text-white/90">
                 Certification #{index + 1}
               </h4>
 
               <button
                 onClick={() => removeCertification(index)}
-                className="text-red-500"
+                className="text-red-400 hover:bg-red-500/10 rounded p-1"
               >
                 <Trash2 size={16} />
               </button>
@@ -87,7 +87,8 @@ export default function Certification({
               onChange={(e) =>
                 updateCertification(index, "name", e.target.value)
               }
-              className="w-full border rounded p-2"
+              className="w-full w-full bg-white/5 border border-white/10 rounded-lg p-2 text-white
+focus:ring-2 focus:ring-violet-500/30 focus:border-violet-500 outline-none"
             />
 
             <input

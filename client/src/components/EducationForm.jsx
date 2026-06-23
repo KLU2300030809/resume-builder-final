@@ -58,10 +58,10 @@ const EducationForm = ({ data, onChange }) => {
       {/* HEADER */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-lg font-semibold text-white">
             Education
           </h3>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-white/60">
             Add your academic qualifications
           </p>
         </div>
@@ -69,7 +69,7 @@ const EducationForm = ({ data, onChange }) => {
         <button
           onClick={addEducation}
           className="flex items-center gap-2 px-3 py-2 text-sm
-          bg-purple-100 text-purple-700 rounded-lg
+bg-gradient-to-r from-violet-600 to-indigo-600 text-white
           hover:bg-purple-200 transition"
         >
           <Plus className="w-4 h-4" />
@@ -79,12 +79,12 @@ const EducationForm = ({ data, onChange }) => {
 
       {/* EMPTY STATE */}
       {data.length === 0 ? (
-        <div className="text-center py-12 border-2 border-dashed rounded-xl">
-          <GraduationCap className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-          <p className="text-gray-600 font-medium">
+        <div className="text-center py-12 border border-white/10 rounded-xl bg-white/5">
+          <GraduationCap className="w-12 h-12 mx-auto mb-3 text-white/30" />
+          <p className="text-white/70 font-medium">
             No education added yet
           </p>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-white/40">
             Click “Add Education” to begin
           </p>
         </div>
@@ -93,17 +93,17 @@ const EducationForm = ({ data, onChange }) => {
           {data.map((education, index) => (
             <div
               key={index}
-              className="p-5 rounded-xl border border-gray-200
-              bg-white shadow-sm space-y-4"
+              className="p-5 rounded-xl border border-white/10
+bg-white/5 backdrop-blur-md space-y-4"
             >
               {/* Card Header */}
               <div className="flex justify-between items-center">
-                <h4 className="font-medium text-gray-800">
+                <h4 className="font-medium text-white/90">
                   Education #{index + 1}
                 </h4>
                 <button
                   onClick={() => removeEducation(index)}
-                  className="text-red-500 hover:text-red-700"
+                  className="text-red-400 hover:text-red-300"
                 >
                   <Trash2 className="size-4" />
                 </button>
@@ -164,13 +164,13 @@ const EducationForm = ({ data, onChange }) => {
               {/* Highlights */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-700">
+                  <label className="text-sm font-medium text-white/70">
                     Academic Highlights (Optional)
                   </label>
                   <button
                     onClick={() => enhanceAI(index)}
                     className="flex items-center gap-1 px-2 py-1 text-xs
-                    bg-purple-100 text-purple-700 rounded
+                    bg-white/5 text-white/70 border border-white/10 hover:bg-white/10 rounded
                     hover:bg-purple-200 transition"
                   >
                     <Sparkles className="w-3 h-3" />
@@ -191,10 +191,10 @@ const EducationForm = ({ data, onChange }) => {
                     )
                   }
                   placeholder="Key coursework, achievements, or honors"
-                  className="w-full text-sm px-3 py-2 rounded-lg
-                  border border-gray-300 resize-none
-                  focus:ring-2 focus:ring-purple-500/30
-                  focus:border-purple-500 outline-none"
+                 className="w-full text-sm px-3 py-2 rounded-lg
+bg-white/5 border border-white/10 text-white resize-none
+focus:ring-2 focus:ring-violet-500/30
+focus:border-violet-500 outline-none"
                 />
               </div>
             </div>

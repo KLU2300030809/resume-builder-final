@@ -1,6 +1,6 @@
 import React from "react";
 import html2pdf from "html2pdf.js";
-
+import ResumePreview from "../components/ResumePreview";
 const Preview = ({ data, accentColor }) => {
 
   const handleDownload = async () => {
@@ -30,40 +30,21 @@ const Preview = ({ data, accentColor }) => {
 
     html2pdfLib().set(opt).from(element).save();
   };
-
+console.log("PREVIEW TEMPLATE:", template);
+console.log("PREVIEW COLOR:", accentColor);
+console.log("PREVIEW DATA:", data);
   return (
     <div>
 
       {/* ✅ IMPORTANT: THIS ID MUST EXIST */}
-      <div
-        id="resume-area"
-        style={{
-          width: "210mm",
-          background: "white",
-          padding: "10mm",
-          boxSizing: "border-box",
-        }}
-      >
-
-        {/* HEADER */}
-        <div style={{ display: "flex", gap: "12px", marginBottom: "10px" }}>
-          <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>
-            {data?.personal_info?.full_name || "Your Name"}
-          </h1>
-
-          <span style={{ color: accentColor }}>
-            {data?.personal_info?.profession || "Your Profession"}
-          </span>
-        </div>
-
-        {/* SUMMARY */}
-        <div>
-          <p style={{ fontSize: "12px", color: "#333" }}>
-            {data?.professional_summary || "No summary available"}
-          </p>
-        </div>
-
-      </div>
+    <div id="resume-area">
+  <ResumePreview
+    data={data}
+    template={template}
+    accentColor={accentColor}
+    isPdfMode={true}
+  />
+</div>
 
       {/* DOWNLOAD BUTTON */}
       <button
